@@ -47,3 +47,25 @@ function gen_cert_use_csr {
     echo "$1 has been generated."
   fi
 }
+
+days=3650
+#root=/etc/pki/CA/
+basepath=$(cd `dirname $0`; pwd)
+
+root_dir=${basepath}/tls/
+create_dir_ifnotexist $root_dir
+
+private_key_dir=${root_dir}private
+create_dir_ifnotexist $private_key_dir
+
+certs_dir=${root_dir}certs
+create_dir_ifnotexist $certs_dir
+
+rootca_key_path=${private_key_dir}/rootca.key.pem
+rootca_cert_path=${certs_dir}/rootca.cer
+
+server_key_path=${private_key_dir}/server.key.pem
+server_cert_path=${certs_dir}/server.cer
+
+clients_dir=${root_dir}clients
+create_dir_ifnotexist $clients_dir

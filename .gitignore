@@ -4,3 +4,5 @@ gotty-*
 gotty.conf.*
 gotty_*_linux_amd64.tar.gz
 ca.srl
+tls/
+*.swp
