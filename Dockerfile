@@ -10,9 +10,9 @@ RUN apk -U upgrade && \
     apk --update add \
       bash \
       curl \
-      docker  \
       fping \
-      go git \
+      git \
+      openssl \
       htop \
       iftop iotop \
       jq \
@@ -27,9 +27,11 @@ RUN apk -U upgrade && \
       xz \
       zsh \
       && \
-    GOPATH=/tmp/gotty go get github.com/yudai/gotty && \
-    mv /tmp/gotty/bin/gotty /usr/local/bin/ && \
-    curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.10.4/bin/linux/amd64/kubectl && \
+    curl -LO https://github.com/yudai/gotty/releases/download/v2.0.0-alpha.3/gotty_2.0.0-alpha.3_linux_amd64.tar.gz && \
+    tar -xzvf gotty_2.0.0-alpha.3_linux_amd64.tar.gz && \
+    chmod +x  gotty && \
+    mv ./gotty /usr/local/bin/ && \
+    curl -LO -m 7200 https://storage.googleapis.com/kubernetes-release/release/v1.10.4/bin/linux/amd64/kubectl && \
     chmod +x ./kubctl && \
     mv kubctl /usr/local/bin/ && \
     apk del go git musl-dev && \
