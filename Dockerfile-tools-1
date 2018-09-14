@@ -1,0 +1,30 @@
+FROM alpine:edge
+MAINTAINER cwocwo <cwocwo1@gmail.com>
+
+ENV LANG="en_US.UTF-8" \
+    LC_ALL="en_US.UTF-8" \
+    LANGUAGE="en_US.UTF-8" \
+    TERM="xterm"
+#jq fping haveged htop iftop iotop lsof man mc mtr mysql-client nano netcat nmap postgresql-client rsync screen tmux ssl-cert tar telnet tree vim xz-utils
+RUN apk -U upgrade && \
+    apk --update add \
+      bash \
+      curl \
+      fping \
+      git go\
+      openssl \
+      htop \
+      iftop iotop \
+      jq \
+      man mc mtr musl-dev mysql-client \
+      nano nmap \
+      postgresql-client python py2-pip \
+      rsync \
+      screen \
+      wget \
+      tar tmux tree \
+      vim \
+      xz \
+      zsh
+
+
