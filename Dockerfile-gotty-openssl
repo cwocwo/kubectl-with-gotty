@@ -1,0 +1,18 @@
+FROM cwocwo/alpine-with-tools:1.0.0
+MAINTAINER cwocwo <cwocwo1@gmail.com>
+
+ENV LANG="en_US.UTF-8" \
+    LC_ALL="en_US.UTF-8" \
+    LANGUAGE="en_US.UTF-8" \
+    TERM="xterm"
+#jq fping haveged htop iftop iotop lsof man mc mtr mysql-client nano netcat nmap postgresql-client rsync screen tmux ssl-cert tar telnet tree vim xz-utils
+#RUN curl -LO https://github.com/yudai/gotty/releases/download/v2.0.0-alpha.3/gotty_2.0.0-alpha.3_linux_amd64.tar.gz && \
+#    tar -xzvf gotty_2.0.0-alpha.3_linux_amd64.tar.gz && \
+#    chmod +x  gotty && \
+#    mv ./gotty /usr/local/bin/ && \
+RUN GOPATH=/tmp/gotty go get github.com/yudai/gotty && \
+    mv /tmp/gotty/bin/gotty /usr/local/bin/ && \
+    git clone https://github.com/cwocwo/kubectl-with-gotty.git /opt/gotty-install && \
+    apk del go git musl-dev fping htop iftop iotop jq man mc mtr mysql-client nano nmap postgresql-client python py2-pip zsh xz rsync
+
+CMD /usr/local/bin/gotty --port 8080 --permit-write --credential user:pass bash

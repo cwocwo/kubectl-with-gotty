@@ -1,0 +1,9 @@
+from nginx:alpine
+MAINTAINER cwocwo <cwocwo1@gmail.com>
+
+RUN apk -U upgrade && \
+    apk --update add \
+      git && \
+      git clone https://github.com/cwocwo/kubectl-with-gotty.git /opt/resources/gotty-certs/ && \
+      apk del git 
+
